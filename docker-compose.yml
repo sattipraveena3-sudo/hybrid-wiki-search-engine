@@ -1,2 +1,17 @@
 services:
-  search: {build: ., ports: ["8000:8000"]}
+  app:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      DATABASE_PATH: /app/data/search.db
+      WRITE_API_KEY: ${WRITE_API_KEY:-}
+    volumes:
+      - ./data:/app/data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/ready')"]
+      interval: 20s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
