@@ -53,7 +53,7 @@ Modes:
 - `bm25` — lexical BM25 only
 - `semantic` — LSI semantic similarity + character similarity
 
-Filters can be supplied with `category` and `section`.
+Filters can be supplied with `category` and `section`. Set `explain=true` to inspect each result's BM25, semantic, TF-IDF, title-overlap and fusion contributions.
 
 ## Index a document
 
